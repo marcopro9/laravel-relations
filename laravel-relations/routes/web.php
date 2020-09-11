@@ -17,4 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('album', 'AlbumController');
+Route::resource('posts','PostController');
+
+Route::get('users-posts','UserController@index');

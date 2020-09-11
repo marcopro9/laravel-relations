@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCoversTable extends Migration
+class CreateImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class CreateCoversTable extends Migration
      */
     public function up()
     {
-        Schema::create('covers', function (Blueprint $table) {
+        Schema::create('images', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('album_id');
             $table->string('url');
             $table->timestamps();
-            $table->foreign('album_id')
-                  ->references('id')
-                  ->on('albums');
         });
     }
 
@@ -31,6 +27,6 @@ class CreateCoversTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('covers');
+        Schema::dropIfExists('images');
     }
 }

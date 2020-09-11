@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Album;
+use App\Post;
+use App\User;
 
-class AlbumController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +15,8 @@ class AlbumController extends Controller
      */
     public function index()
     {
-        $albums = Album::all();
-
-        return view('album.index', compact('albums'));
+        $posts = Post::all();
+        return view('posts.index', compact('posts'));
     }
 
     /**
@@ -46,9 +46,9 @@ class AlbumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Album $album)
+    public function show(Post $post)
     {
-        return view('album.show', compact('album'));
+        return view('posts.show', compact('post'));
     }
 
     /**
@@ -57,9 +57,13 @@ class AlbumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        $users = User::all();
+        return view('posts.edit', [
+          'post'=> $post,
+          'users'=> $users,
+        ]);
     }
 
     /**
@@ -69,9 +73,12 @@ class AlbumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        $data= $request->all();
+        $post->update($data);
+
+        return redirect()->route('posts.show',$post);
     }
 
     /**
