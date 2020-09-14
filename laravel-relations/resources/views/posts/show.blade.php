@@ -6,6 +6,18 @@
   </h3>
 @endif
 
+@if (!$post->categories->isEmpty())
+  <div>
+    <h3>Categories</h3>
+    <ul>
+      @foreach ($post->categories as $category)
+        <li>{{$category->name}}</li>
+      @endforeach
+    </ul>
+  </div>
+@endif
+
+
 <div>
   <img src="{{$post->image->url}}" alt="{{$post->title}}">
 </div>

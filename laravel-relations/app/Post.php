@@ -19,4 +19,7 @@ class Post extends Model
     public function image(){
       return $this->belongsTo('App\Image');
     }
+    public function categories(){
+      return $this->belongsToMany('App\Category');
+    }
 }

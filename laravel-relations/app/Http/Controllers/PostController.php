@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\User;
+use App\Category;
 
 class PostController extends Controller
 {
@@ -60,9 +61,11 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $users = User::all();
+        $categories = Category::all();
         return view('posts.edit', [
           'post'=> $post,
           'users'=> $users,
+          'categories'=> $categories,
         ]);
     }
 
@@ -76,6 +79,7 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $data= $request->all();
+        $post->categories()->sync($data['categories']);
         $post->update($data);
 
         return redirect()->route('posts.show',$post);
